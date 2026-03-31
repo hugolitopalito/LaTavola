@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Produtos</title>
+    </head>
+<body>
+    <header>
+        <h1>Gestão de Produtos</h1>
+        <button id="btnNovoProduto">+ Novo Produto</button>
+    </header>
+
+    <main>
+        <table id="tabelaProdutos">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Categoria</th>
+                    <th>Preço</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="listaProdutos">
+                </tbody>
+        </table>
+    </main>
+
+    <div id="modalNovo" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn" id="fecharModalNovo">&times;</span>
+            <h2>Novo Produto</h2>
+            <form id="formNovo">
+                <label for="novoNome">Nome do Produto</label>
+                <input type="text" id="novoNome" required>
+
+                <label for="novaCategoria">Categoria</label>
+                <input type="text" id="novaCategoria" required>
+
+                <label for="novoPreco">Preço (R$)</label>
+                <input type="number" id="novoPreco" step="0.01" required>
+
+                <label>
+                    <input type="checkbox" id="novoStatus" checked> Produto ativo no cardápio
+                </label>
+
+                <div class="modal-actions">
+                    <button type="button" id="btnCancelarNovo">Cancelar</button>
+                    <button type="submit">Criar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modalEditar" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn" id="fecharModalEditar">&times;</span>
+            <h2>Editar Produto</h2>
+            <form id="formEditar">
+                <input type="hidden" id="editId">
+                
+                <label for="editNome">Nome do Produto</label>
+                <input type="text" id="editNome" required>
+
+                <label for="editCategoria">Categoria</label>
+                <input type="text" id="editCategoria" required>
+
+                <label for="editPreco">Preço (R$)</label>
+                <input type="number" id="editPreco" step="0.01" required>
+
+                <label>
+                    <input type="checkbox" id="editStatus"> Produto ativo no cardápio
+                </label>
+
+                <div class="modal-actions">
+                    <button type="button" id="btnCancelarEditar">Cancelar</button>
+                    <button type="submit">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="Produto.js"></script>
+</body>
+</html>
