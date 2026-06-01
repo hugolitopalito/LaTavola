@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cozinha - La Tavola</title>
+    <style>
+        body { font-family: sans-serif; background-color: #1a1a1a; color: #fff; padding: 20px; }
+        header { border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px; }
+        
+        /* Quadro Kanban */
+        .board { display: flex; gap: 20px; align-items: flex-start; }
+        .coluna { flex: 1; background: #2a2a2a; border-radius: 8px; padding: 15px; min-height: 500px; }
+        .coluna h2 { font-size: 1.2em; border-bottom: 2px solid; padding-bottom: 10px; margin-top: 0; }
+        
+        /* Cores das Colunas */
+        #col-pendentes h2 { border-color: #f39c12; color: #f39c12; }
+        #col-preparo h2 { border-color: #e67e22; color: #e67e22; }
+        #col-prontos h2 { border-color: #27ae60; color: #27ae60; }
+
+        /* Cartões de Pedido */
+        .pedido-card { background: #333; border-radius: 6px; padding: 15px; margin-bottom: 15px; border-left: 5px solid #fff; }
+        .pedido-card.delivery { border-left-color: #3498db; background: #1e3a5f; } /* Cor azul para delivery */
+        
+        .pedido-header { display: flex; justify-content: space-between; font-size: 0.9em; margin-bottom: 10px; opacity: 0.8; }
+        .pedido-cliente { font-weight: bold; font-size: 1.1em; margin-bottom: 10px; }
+        .pedido-itens { list-style: none; padding: 0; margin: 0 0 15px 0; }
+        .pedido-itens li { padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        
+        .btn-acao { width: 100%; padding: 10px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
+        .btn-iniciar { background: #3498db; color: #fff; }
+        .btn-pronto { background: #2ecc71; color: #fff; }
+        .btn-despachar { background: #9b59b6; color: #fff; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Cozinha - Pedidos em Tempo Real</h1>
+    </header>
+
+    <main class="board">
+        <section class="coluna" id="col-pendentes">
+            <h2>Pendentes (<span id="count-pendentes">0</span>)</h2>
+            <div class="lista-pedidos" id="listaPendentes">
+                </div>
+        </section>
+
+        <section class="coluna" id="col-preparo">
+            <h2>Em Preparo (<span id="count-preparo">0</span>)</h2>
+            <div class="lista-pedidos" id="listaPreparo">
+                </div>
+        </section>
+
+        <section class="coluna" id="col-prontos">
+            <h2>Prontos (<span id="count-prontos">0</span>)</h2>
+            <div class="lista-pedidos" id="listaProntos">
+                </div>
+        </section>
+    </main>
+
+    <script type="module" src="./Cozinha.js"></script>
+</body>
+</html>

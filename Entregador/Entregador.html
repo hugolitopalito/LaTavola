@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Entregador - La Tavola</title>
+    <style>
+        body { font-family: sans-serif; background-color: #1a1a1a; color: #fff; padding: 20px; }
+        header { border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        
+        /* Stats do Entregador */
+        .stats-container { display: flex; gap: 15px; margin-bottom: 30px; }
+        .stat-box { flex: 1; background: #2a2a2a; padding: 20px; border-radius: 8px; border: 1px solid #333; }
+        .stat-box span { display: block; color: #aaa; font-size: 0.9em; margin-bottom: 10px; }
+        .stat-box strong { font-size: 1.8em; }
+        .text-green { color: #2ecc71; }
+        .text-yellow { color: #f1c40f; }
+
+        /* Seções Gerais */
+        .secao-pedidos { background: #2a2a2a; border-radius: 8px; border: 1px solid #333; padding: 20px; margin-bottom: 30px; }
+        .secao-pedidos h2 { margin-top: 0; font-size: 1.2em; border-bottom: 1px solid #444; padding-bottom: 10px; }
+        
+        /* Cards de Pedido (Disponível e Andamento) */
+        .pedido-card { background: #222; border-radius: 8px; padding: 20px; margin-bottom: 15px; border: 1px solid #444; }
+        .pedido-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .badge { background: #1e4a28; color: #2ecc71; padding: 5px 10px; border-radius: 20px; font-size: 0.8em; border: 1px solid #2ecc71; }
+        
+        .pedido-info { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .info-block { flex: 1; }
+        .info-block span { display: block; color: #aaa; font-size: 0.8em; margin-bottom: 5px; }
+        .info-block strong { font-size: 1.1em; }
+        .info-block .sub { color: #777; font-size: 0.9em; }
+        
+        .pedido-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #444; padding-top: 15px; }
+        
+        /* Botões */
+        .btn-aceitar { background: #d4af37; color: #000; border: none; padding: 10px 20px; font-weight: bold; border-radius: 4px; cursor: pointer; }
+        .btn-aceitar:hover { background: #f1c40f; }
+        .btn-entregue { background: #2ecc71; color: #fff; border: none; padding: 12px 20px; font-weight: bold; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-entregue:hover { background: #27ae60; }
+
+        /* Grid do Resumo do Dia */
+        .resumo-grid { display: flex; gap: 15px; }
+        .resumo-box { flex: 1; background: #222; padding: 20px; text-align: center; border-radius: 8px; }
+        .resumo-box span { display: block; color: #aaa; font-size: 0.9em; margin-bottom: 10px; }
+        .resumo-box strong { font-size: 2em; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1 style="color: #d4af37; margin: 0;">La Tavola</h1>
+            <span style="color: #aaa; font-size: 0.9em;">Sistema de Gestão</span>
+        </div>
+        <div style="text-align: right;">
+            <strong>Bruno Entregador</strong><br>
+            <span style="color: #aaa; font-size: 0.8em;">Entregador</span>
+        </div>
+    </header>
+
+    <div class="stats-container">
+        <div class="stat-box">
+            <span>Entregas Hoje</span>
+            <strong class="text-green" id="statEntregas">0</strong>
+        </div>
+        <div class="stat-box">
+            <span>Em Rota</span>
+            <strong class="text-yellow" id="statRota">0</strong>
+        </div>
+        <div class="stat-box">
+            <span>Ganhos Hoje</span>
+            <strong id="statGanhos">R$ 0.00</strong>
+        </div>
+        <div class="stat-box">
+            <span>Dist. Média</span>
+            <strong id="statDistancia">0.0 km</strong>
+        </div>
+    </div>
+
+    <div class="secao-pedidos" id="secaoAndamento" style="display: none;">
+        <h2>Minhas Entregas em Andamento</h2>
+        <div id="listaAndamento">
+            </div>
+    </div>
+
+    <div class="secao-pedidos" id="secaoDisponiveis">
+        <h2>Pedidos Disponíveis (<span id="qtdDisponiveis">0</span>)</h2>
+        <div id="listaPedidos">
+            <p style="color: #aaa;">Procurando pedidos prontos para entrega...</p>
+        </div>
+    </div>
+
+    <div class="secao-pedidos" id="secaoResumo" style="display: none;">
+        <h2>Resumo do Dia</h2>
+        <div class="resumo-grid">
+            <div class="resumo-box">
+                <span>Total de Entregas</span>
+                <strong class="text-green" id="resumoEntregas">0</strong>
+            </div>
+            <div class="resumo-box">
+                <span>Total Ganho</span>
+                <strong style="color: #d4af37;" id="resumoGanhos">R$ 0.00</strong>
+            </div>
+            <div class="resumo-box">
+                <span>Distância Total</span>
+                <strong id="resumoDistancia">0.0 km</strong>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./Entregador.js"></script>
+</body>
+</html>

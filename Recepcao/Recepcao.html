@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recepção & Atendimento - La Tavola</title>
+    <style>
+      /* Estilos baseados no seu design escuro */
+      body {
+        font-family: sans-serif;
+        background-color: #1a1a1a;
+        color: #fff;
+        padding: 20px;
+      }
+      header {
+        border-bottom: 1px solid #333;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      /* Top Cards */
+      .dashboard-cards {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+      .card {
+        flex: 1;
+        background: #222;
+        border: 1px solid #333;
+        padding: 20px;
+        border-radius: 8px;
+        position: relative;
+      }
+      .card span {
+        color: #aaa;
+        font-size: 0.9em;
+        display: block;
+        margin-bottom: 10px;
+      }
+      .card strong {
+        font-size: 2em;
+      }
+      .card .subtext {
+        color: #777;
+        font-size: 0.8em;
+        display: block;
+        margin-top: 5px;
+      }
+      .status-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+      .dot-green {
+        background-color: #2ecc71;
+      }
+      .dot-red {
+        background-color: #e74c3c;
+      }
+
+      /* Botões de Ação */
+      .action-buttons {
+        margin-bottom: 30px;
+        display: flex;
+        gap: 15px;
+      }
+      .btn-comanda {
+        background: #5a1a1a;
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .btn-mesas {
+        background: #3a2a1a;
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      /* Seções de Listas */
+      .section-box {
+        border: 1px solid #d4af37;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background: #1f1f1f;
+      }
+      .section-box.secondary {
+        border-color: #444;
+      }
+      .section-box h3 {
+        margin-top: 0;
+        color: #d4af37;
+        font-size: 1.1em;
+      }
+      .section-box.secondary h3 {
+        color: #fff;
+      }
+
+      /* Cartão de Pedido Pendente */
+      .pedido-pendente {
+        border-bottom: 1px solid #333;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+      }
+      .pedido-pendente:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 0;
+      }
+      .pedido-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+      }
+      .badge {
+        background: #1e3a5f;
+        color: #3498db;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.8em;
+      }
+
+      .pedido-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 15px;
+      }
+      .info-label {
+        color: #aaa;
+        font-size: 0.8em;
+        margin-bottom: 4px;
+        display: block;
+      }
+      .info-value {
+        font-size: 1em;
+        font-weight: bold;
+      }
+
+      .botoes-aprovacao {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+      }
+      .btn-aprovar {
+        background: #d4af37;
+        color: #000;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .btn-recusar {
+        background: transparent;
+        border: 1px solid #e74c3c;
+        color: #e74c3c;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      /* Item em Andamento */
+      .item-andamento {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #333;
+        padding: 12px 0;
+      }
+      .item-andamento:last-child {
+        border-bottom: none;
+      }
+      .badge-preparo {
+        background: #5c3a1e;
+        color: #e67e22;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 0.7em;
+      }
+      .badge-pronto {
+        background: #1e4a28;
+        color: #2ecc71;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 0.7em;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1 style="color: #d4af37; margin: 0">La Tavola</h1>
+        <span style="color: #aaa; font-size: 0.9em">Sistema de Gestão</span>
+      </div>
+      <div style="text-align: right">
+        <strong>Maria Silva</strong><br />
+        <span style="color: #aaa; font-size: 0.8em"
+          >Recepção / Atendimento</span
+        >
+      </div>
+    </header>
+
+    <h2>Recepção & Atendimento - Dashboard</h2>
+
+    <div class="dashboard-cards">
+      <div class="card">
+        <div class="status-dot dot-green"></div>
+        <span>Mesas Livres</span>
+        <strong id="contadorMesasLivres">0</strong>
+      </div>
+      <div class="card">
+        <div class="status-dot dot-red"></div>
+        <span>Mesas Ocupadas</span>
+        <strong id="contadorMesasOcupadas">0</strong>
+      </div>
+      <div class="card" style="border-color: #d4af37">
+        <span>Pedidos Delivery</span>
+        <strong id="contadorPendentes">0</strong>
+        <span class="subtext">Aguardando aprovação</span>
+      </div>
+      <div class="card">
+        <span>Itens na Cozinha</span>
+        <strong id="contadorCozinha">0</strong>
+        <span class="subtext">Cozinha disponível</span>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button
+        class="btn-comanda"
+        onclick="window.location.href='./Comanda/Comanda.html'"
+      >
+        ⊕ Abrir Comanda
+      </button>
+      <button class="btn-mesas" onclick="window.location.href='./Mesas/Mesas.html'">
+        👥 Visualizar Mesas
+      </button>
+    </div>
+
+    <div class="section-box" id="containerPendentes" style="display: none;">
+      <h3>
+        Pedidos Delivery Pendentes (<span id="qtdPendentesSecao">0</span>)
+      </h3>
+      <p style="color: #aaa; font-size: 0.85em; margin-bottom: 20px">
+        Aprove ou recuse os pedidos baseado na capacidade da cozinha
+      </p>
+
+      <div id="listaPendentes">
+        </div>
+    </div>
+
+    <div class="section-box secondary">
+      <h3>Pedidos Delivery em Andamento (<span id="qtdAndamento">0</span>)</h3>
+      <div id="listaAndamento">
+        <p style="color: #777">Nenhum delivery em andamento.</p>
+      </div>
+    </div>
+
+    <div class="section-box secondary">
+      <h3>Comandas Presenciais Ativas (<span id="qtdComandas">0</span>)</h3>
+      <div id="listaComandasAtivas">
+        <p style="color: #777">Nenhuma comanda ativa.</p>
+      </div>
+    </div>
+
+    <script type="module" src="./Recepcao.js"></script>
+  </body>
+</html>

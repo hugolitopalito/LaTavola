@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão de Produtos</title>
-    </head>
+</head>
 <body>
     <header>
         <h1>Gestão de Produtos</h1>
@@ -23,7 +23,7 @@
                 </tr>
             </thead>
             <tbody id="listaProdutos">
-                </tbody>
+            </tbody>
         </table>
     </main>
 
@@ -36,7 +36,14 @@
                 <input type="text" id="novoNome" required>
 
                 <label for="novaCategoria">Categoria</label>
-                <input type="text" id="novaCategoria" required>
+                <select id="novaCategoria" required>
+                    <option value="">Selecione uma categoria...</option>
+                    <option value="Pratos Principais">Pratos Principais</option>
+                    <option value="Entradas">Entradas</option>
+                    <option value="Saladas">Saladas</option>
+                    <option value="Sobremesas">Sobremesas</option>
+                    <option value="Bebidas">Bebidas</option>
+                </select>
 
                 <label for="novoPreco">Preço (R$)</label>
                 <input type="number" id="novoPreco" step="0.01" required>
@@ -64,7 +71,14 @@
                 <input type="text" id="editNome" required>
 
                 <label for="editCategoria">Categoria</label>
-                <input type="text" id="editCategoria" required>
+                <select id="editCategoria" required>
+                    <option value="">Selecione uma categoria...</option>
+                    <option value="Pratos Principais">Pratos Principais</option>
+                    <option value="Entradas">Entradas</option>
+                    <option value="Saladas">Saladas</option>
+                    <option value="Sobremesas">Sobremesas</option>
+                    <option value="Bebidas">Bebidas</option>
+                </select>
 
                 <label for="editPreco">Preço (R$)</label>
                 <input type="number" id="editPreco" step="0.01" required>

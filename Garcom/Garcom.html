@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard do Garçom - La Tavola</title>
+    <style>
+        body { font-family: sans-serif; background-color: #1a1a1a; color: #fff; padding: 20px; }
+        header { border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        
+        /* Sugestão Estratégica */
+        .sugestao-box { background: linear-gradient(135deg, #3a2a1a 0%, #1a1a1a 100%); border: 1px solid #d4af37; padding: 20px; border-radius: 8px; margin-bottom: 30px; display: flex; gap: 20px; align-items: flex-start; }
+        .icone-estrela { background: #d4af37; color: #000; width: 50px; height: 50px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.5em; font-weight: bold; }
+        
+        /* Lista de Mesas */
+        .secao-mesas { background: #222; border-radius: 8px; border: 1px solid #333; padding: 20px; }
+        .mesa-item { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #333; cursor: pointer; transition: 0.2s; }
+        .mesa-item:hover { background: rgba(255,255,255,0.05); }
+        .mesa-item:last-child { border-bottom: none; }
+        
+        /* Indicadores de Status */
+        .status-badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.75em; margin-top: 5px; font-weight: bold; }
+        .badge-preparo { background: #5c3a1e; color: #e67e22; }
+        .badge-pendente { background: #333; color: #aaa; }
+        .badge-pronto { background: #1e3a5f; color: #3498db; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1 style="color: #d4af37; margin: 0;">La Tavola</h1>
+            <span style="color: #aaa; font-size: 0.9em;">Sistema de Gestão</span>
+        </div>
+        <div style="text-align: right;">
+            <strong>João Santos</strong><br>
+            <span style="color: #aaa; font-size: 0.8em;">Garçom</span>
+        </div>
+    </header>
+
+    <h2>Garçom - Dashboard</h2>
+
+    <div class="sugestao-box">
+        <div class="icone-estrela">☆</div>
+        <div>
+            <strong style="color: #d4af37; font-size: 1.1em;">⭐ Sugestão Estratégica do Dia</strong>
+            <h3 style="margin: 5px 0;">Lasanha Bolonhesa</h3>
+            <span style="color: #aaa; font-size: 0.85em;">Pratos Principais • R$ 48.00 • Margem de 75%</span>
+            <p style="margin: 5px 0 0 0; font-size: 0.9em;">💡 Produto com alta margem e popularidade. Incentive os clientes!</p>
+        </div>
+    </div>
+
+    <div class="secao-mesas">
+        <h3 style="margin-top: 0; border-bottom: 1px solid #444; padding-bottom: 15px;">Minhas Mesas Ocupadas</h3>
+        <div id="listaMesasGarcom">
+            <p style="color: #777;">Nenhuma mesa ocupada no momento.</p>
+        </div>
+    </div>
+
+    <script type="module" src="./Garcom.js"></script>
+</body>
+</html>
