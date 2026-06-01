@@ -1,120 +1,96 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Matriz Estratégica - La Tavola</title>
-    
+    <link rel="stylesheet" href="Matriz.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <style>
-        body { font-family: sans-serif; background-color: #1a1a1a; color: #fff; padding: 20px; margin: 0; padding-bottom: 100px; }
-        header { border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
-        
-        .btn-voltar { background: #333; color: #fff; border: 1px solid #444; text-decoration: none; padding: 10px 20px; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; cursor: pointer; }
-        .btn-voltar:hover { background: #444; }
-
-        /* Box Superior e Gráfico */
-        .section-box { background: #222; border: 1px solid #333; border-radius: 8px; padding: 25px; margin-bottom: 25px; }
-        .section-box h3 { margin-top: 0; color: #fff; font-size: 1.2em; margin-bottom: 5px; }
-        .section-box p { color: #aaa; font-size: 0.9em; margin-top: 0; margin-bottom: 20px; }
-
-        .chart-container { position: relative; height: 60vh; width: 100%; }
-
-        /* Legend / Eixo Info */
-        .axis-info { display: flex; justify-content: center; gap: 30px; margin-top: 20px; font-size: 0.85em; color: #aaa; }
-        .axis-info div { display: flex; flex-direction: column; align-items: center; gap: 5px; }
-        .axis-info strong { color: #fff; display: flex; align-items: center; gap: 5px;}
-
-        /* Grid de Cartões Inferiores */
-        .cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 30px; }
-        .legend-card { background: #222; border: 1px solid #333; padding: 20px; border-radius: 8px; }
-        .legend-card .icon-row { display: flex; gap: 10px; margin-bottom: 10px; font-size: 1.2em; align-items: center; }
-        .legend-card h4 { margin: 0 0 5px 0; font-size: 1.1em; color: #fff; }
-        .legend-card p { margin: 0; font-size: 0.85em; color: #aaa; line-height: 1.4; }
-        
-        /* Cores Específicas dos Emojis */
-        .cor-estrela { color: #d4af37; }
-        .cor-cao { color: #a52a2a; }
-        .cor-cavalo { color: #8b6b43; }
-        .cor-quebra { color: #556b2f; }
-        
-        /* Bolinhas CSS para combinar com o Canvas */
-        .dot { width: 15px; height: 15px; border-radius: 50%; display: inline-block; }
-        .dot-gold { background-color: #d4af37; }
-        .dot-red { background-color: #a52a2a; }
-
-    </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <header>
-        <div>
-            <h1 style="color: #d4af37; margin: 0;">La Tavola</h1>
-            <span style="color: #aaa; font-size: 0.9em;">Sistema de Gestão</span>
-        </div>
-        <div style="text-align: right;">
-            <strong>Ana Gerente</strong><br>
-            <span style="color: #aaa; font-size: 0.8em;">Gerente</span>
-        </div>
+      <div class="brand">
+        <h1>La Tavola</h1>
+        <span>Sistema de Gestão</span>
+      </div>
+      <div class="usuario-info">
+        <strong id="headerNomeUsuario"> Carregando... </strong><br />
+        <span id="headerPerfilUsuario"> ... </span>
+      </div>
     </header>
-
-    <h2 style="margin-bottom: 20px;">Matriz Estratégica</h2>
-
-    <button class="btn-voltar" onclick="window.location.href='../DashBoard.html'">← Voltar</button>
-
+    <h2 class="titulo-pagina">Matriz Estratégica</h2>
+    <button
+      class="btn-voltar"
+      onclick="window.location.href='../DashBoard.html'"
+    >
+      ← Voltar
+    </button>
     <div class="section-box">
-        <h3>Matriz de Classificação de Produtos</h3>
-        <p>Visualização gráfica da posição estratégica de cada produto. O eixo X representa a popularidade (vendas relativas à média) e o eixo Y representa a margem de lucro percentual.</p>
-        <div class="chart-container">
-            <canvas id="matrizChart"></canvas>
+      <h3>Matriz de Classificação de Produtos</h3>
+      <p>
+        Visualização gráfica da posição estratégica de cada produto. O eixo X
+        representa a popularidade (vendas relativas à média) e o eixo Y
+        representa a margem de lucro percentual.
+      </p>
+      <div class="chart-container">
+        <canvas id="matrizChart"></canvas>
+      </div>
+      <div class="axis-info">
+        <div>
+          <strong> 🧩 Quebra-Cabeça </strong>
+          <span> Alta Margem + Baixa Popularidade </span>
         </div>
-
-        <div class="axis-info">
-            <div>
-                <strong>🧩 Quebra-Cabeça</strong>
-                <span>Alta Margem + Baixa Popularidade</span>
-            </div>
-            <div>
-                <strong>⭐ Estrela</strong>
-                <span>Alta Margem + Alta Popularidade</span>
-            </div>
+        <div>
+          <strong> ⭐ Estrela </strong>
+          <span> Alta Margem + Alta Popularidade </span>
         </div>
-        <div class="axis-info" style="margin-top: 10px;">
-            <div>
-                <strong>🐶 Cão</strong>
-                <span>Baixa Margem + Baixa Popularidade</span>
-            </div>
-            <div>
-                <strong>🐎 Cavalo de Batalha</strong>
-                <span>Baixa Margem + Alta Popularidade</span>
-            </div>
+      </div>
+      <div class="axis-info axis-bottom">
+        <div>
+          <strong> 🐶 Cão </strong>
+          <span> Baixa Margem + Baixa Popularidade </span>
         </div>
+        <div>
+          <strong> 🐎 Cavalo de Batalha </strong>
+          <span> Baixa Margem + Alta Popularidade </span>
+        </div>
+      </div>
     </div>
-
     <div class="cards-grid">
-        <div class="legend-card">
-            <div class="icon-row"><div class="dot dot-gold"></div> ⭐</div>
-            <h4>Estrela</h4>
-            <p>Mantenha em destaque. São seus melhores produtos.</p>
+      <div class="legend-card">
+        <div class="icon-row">
+          <div class="dot dot-gold"></div>
+          ⭐
         </div>
-        <div class="legend-card">
-            <div class="icon-row"><div class="dot dot-red"></div> 🐎</div>
-            <h4>Cavalo de Batalha</h4>
-            <p>Populares mas pouco lucrativos. Considere ajustar preço ou custo.</p>
+        <h4>Estrela</h4>
+        <p>Mantenha em destaque. São seus melhores produtos.</p>
+      </div>
+      <div class="legend-card">
+        <div class="icon-row">
+          <div class="dot dot-red"></div>
+          🐎
         </div>
-        <div class="legend-card">
-            <div class="icon-row"><div class="dot dot-gold" style="opacity: 0.7;"></div> 🧩</div>
-            <h4>Quebra-Cabeça</h4>
-            <p>Lucrativos mas pouco vendidos. Invista em marketing.</p>
+        <h4>Cavalo de Batalha</h4>
+        <p>Populares mas pouco lucrativos. Considere ajustar preço ou custo.</p>
+      </div>
+      <div class="legend-card">
+        <div class="icon-row">
+          <div class="dot dot-gold dot-opacity"></div>
+          🧩
         </div>
-        <div class="legend-card">
-            <div class="icon-row"><div class="dot dot-red" style="opacity: 0.7;"></div> 🐶</div>
-            <h4>Cão</h4>
-            <p>Baixa performance. Considere remover do cardápio.</p>
-        </div>
-    </div>
+        <h4>Quebra-Cabeça</h4>
+        <p>Lucrativos mas pouco vendidos. Invista em marketing.</p>
+      </div>
+      <div class="legend-card">
+        <div class="icon-row">
+          <div class="dot dot-red dot-opacity"></div>
 
+          🐶
+        </div>
+        <h4>Cão</h4>
+        <p>Baixa performance. Considere remover do cardápio.</p>
+      </div>
+    </div>
     <script type="module" src="./Matriz.js"></script>
-</body>
+  </body>
 </html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Relatórios e Análises - La Tavola</title>
+    <link rel="stylesheet" href="Relatorios.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <h1>La Tavola</h1>
+        <span>Sistema de Gestão</span>
+      </div>
+      <div class="usuario-info">
+        <strong id="headerNomeUsuario">Carregando...</strong><br />
+        <span id="headerPerfilUsuario"> ... </span>
+      </div>
+    </header>
+    <h2>Relatórios e Análises</h2>
+    <button
+      class="btn-voltar"
+      onclick="window.location.href='../DashBoard.html'"
+    >
+      ← Voltar
+    </button>
+
+    <div class="filtro-periodo">
+      <span>📅</span>
+      <select>
+        <option>Todos os períodos</option>
+        <option>Este Mês</option>
+        <option>Mês Passado</option>
+      </select>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-icon">＄</div>
+        <span>Faturamento Total</span>
+        <strong id="valFaturamento"> R$ 0.00 </strong>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon icon-margem" id="iconMargem">↗</div>
+        <span>Lucro Absoluto (Margem)</span>
+        <strong id="valLucro"> R$ 0.00 </strong>
+        <span class="subtext" id="valMargemPerc"> 0.0% de margem global </span>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">＄</div>
+        <span>Ticket Médio</span>
+        <strong id="valTicket"> R$ 0.00 </strong>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">📦</div>
+        <span>Total de Vendas</span>
+        <strong id="valQtdVendas"> 0 </strong>
+        <span class="subtext"> comandas fechadas </span>
+      </div>
+    </div>
+    <div class="charts-grid">
+      <div class="chart-box">
+        <h3>Top 10 Produtos por Receita</h3>
+        <div class="chart-container">
+          <canvas id="chartTop10"></canvas>
+        </div>
+      </div>
+      <div class="chart-box">
+        <h3>Receita por Categoria</h3>
+        <div class="chart-container">
+          <canvas id="chartCategorias"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="table-container">
+      <h3>Detalhamento de Produtos</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Categoria</th>
+            <th class="text-center">Qtd. Vendida</th>
+            <th>Receita</th>
+            <th>Custo Total</th>
+            <th>Lucro</th>
+            <th>Margem</th>
+          </tr>
+        </thead>
+        <tbody id="listaRelatorio">
+          <tr>
+            <td colspan="7" class="loading-cell">Calculando relatórios...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script type="module" src="./Relatorios.js"></script>
+  </body>
+</html>

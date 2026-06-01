@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestão de Usuários - La Tavola</title>
+    <link rel="stylesheet" href="Usuario.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo-area">
+        <h1>La Tavola</h1>
+        <span>Sistema de Gestão</span>
+      </div>
+      <div class="usuario-info">
+        <strong id="headerNomeUsuario">Carregando...</strong><br />
+        <span id="headerPerfilUsuario">...</span>
+      </div>
+    </header>
+    <h2 class="titulo-pagina">Gestão de Usuários</h2>
+    <div class="header-actions">
+      <button
+        class="btn-voltar"
+        onclick="window.location.href='../DashBoard.html'"
+      >
+        ← Voltar
+      </button>
+      <button class="btn-primario" id="btnAbrirCadastro">
+        👤 Criar Usuário
+      </button>
+    </div>
+    <div id="telaLista">
+      <div class="info-box">
+        <h3>Gestão de Usuários - Demo</h3>
+        <p>
+          Os garçons cadastrados aqui são automaticamente distribuídos de forma
+          igualitária entre as mesas do salão.
+        </p>
+      </div>
+      <div class="table-container">
+        <h3>Usuários do Sistema</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Perfil</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaUsuarios">
+            <tr>
+              <td
+                colspan="5"
+                class="loading-cell"
+                style="text-align: center; color: #777; padding: 20px"
+              >
+                Carregando usuários...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-container">
+        <h3>Permissões por Perfil</h3>
+        <div class="permissoes-grid">
+          <div class="permissao-box">
+            <h4>Recepção</h4>
+            <ul>
+              <li>Abrir comandas e aprovar delivery</li>
+              <li>Visualizar mesas</li>
+              <li>Ver status de comandas</li>
+            </ul>
+          </div>
+          <div class="permissao-box">
+            <h4>Garçom</h4>
+            <ul>
+              <li>Adicionar itens aos pedidos</li>
+              <li>Responsabilidade dividida nas mesas</li>
+              <li>Ver sugestões do cardápio</li>
+            </ul>
+          </div>
+          <div class="permissao-box">
+            <h4>Cozinha</h4>
+            <ul>
+              <li>Ver pedidos em tempo real</li>
+              <li>Atualizar status de preparo</li>
+            </ul>
+          </div>
+          <div class="permissao-box">
+            <h4>Gerente</h4>
+            <ul>
+              <li>Acesso total ao sistema</li>
+              <li>Engenharia de cardápio e relatórios</li>
+              <li>Gestão de usuários</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="telaCadastro">
+      <div class="info-box info-cadastro">
+        <h3>Cadastro de Novo Usuário</h3>
+        <p>
+          Preencha os dados. Se o perfil for "Garçom", as mesas serão
+          redistribuídas automaticamente.
+        </p>
+      </div>
+      <div class="form-container">
+        <form id="formNovoUsuario">
+          <div class="form-group">
+            <label>Nome Completo *</label>
+            <input
+              type="text"
+              id="cadNome"
+              placeholder="Digite o nome completo"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <input
+              type="email"
+              id="cadEmail"
+              placeholder="email@restaurante.com"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Perfil *</label>
+            <select id="cadPerfil" required>
+              <option value="Garçom">Garçom</option>
+              <option value="Recepção">Recepção</option>
+              <option value="Cozinha">Cozinha</option>
+              <option value="Gerente">Gerente</option>
+              <option value="Entregador">Entregador</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Telefone</label>
+            <input
+              type="tel"
+              id="cadTelefone"
+              placeholder="(00) 00000-0000"
+              maxlength="15"
+            />
+          </div>
+          <div class="form-group">
+            <label>Senha * (Padrão sugerido: 123456)</label>
+            <input type="password" id="cadSenha" value="123456" required />
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-cancelar" id="btnCancelar">
+              Cancelar
+            </button>
+            <button type="submit" class="btn-primario">
+              Cadastrar Usuário
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script type="module" src="./Usuarios.js"></script>
+  </body>
+</html>

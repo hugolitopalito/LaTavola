@@ -4,108 +4,175 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adicionar Itens - La Tavola</title>
-    <style>
-        body { font-family: sans-serif; background-color: #1a1a1a; color: #fff; padding: 20px; }
-        header { border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px; }
-        .btn-voltar { background: #333; color: #fff; text-decoration: none; padding: 8px 15px; border-radius: 4px; display: inline-block; margin-bottom: 20px; }
-        
-        .layout { display: flex; gap: 20px; align-items: flex-start; }
-        .conteudo-principal { flex: 2; }
-        .sidebar { flex: 1; position: sticky; top: 20px; }
 
-        /* Caixa de Cadeiras */
-        .caixa-cadeiras { background: #222; border: 1px solid #333; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
-        .caixa-cadeiras h3 { margin-top: 0; display: flex; justify-content: space-between; font-size: 1.1em; }
-        .botoes-cadeira { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
-        .btn-cadeira { background: #333; color: #fff; border: 1px solid #444; padding: 10px 15px; border-radius: 6px; cursor: pointer; }
-        .btn-cadeira.ativo { background: #d4af37; color: #000; font-weight: bold; border-color: #d4af37; }
-
-        /* Filtros e Busca */
-        .busca-container { margin-bottom: 15px; }
-        .busca-container input { width: 100%; padding: 12px; background: #111; border: 1px solid #444; color: #fff; border-radius: 6px; box-sizing: border-box; }
-        .filtros { display: flex; gap: 10px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 5px; }
-        .filtros button { background: #3a2a1a; color: #fff; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; white-space: nowrap; }
-        .filtros button.ativo { background: #5a1a1a; font-weight: bold; }
-
-        /* Lista de Produtos */
-        .produto-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding: 15px 0; }
-        .produto-item:last-child { border-bottom: none; }
-        .btn-add { background: #5a1a1a; color: #fff; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
-        .controles-qtd { display: flex; align-items: center; gap: 10px; background: #222; padding: 5px; border-radius: 4px; border: 1px solid #444; }
-        .controles-qtd button { background: transparent; color: #fff; border: none; cursor: pointer; font-size: 1.2em; width: 25px; }
-
-        /* Carrinho */
-        .carrinho-box { background: #222; border: 1px solid #333; padding: 20px; border-radius: 8px; }
-        .carrinho-box h3 { margin-top: 0; border-bottom: 1px solid #444; padding-bottom: 10px; }
-        .item-carrinho { display: flex; justify-content: space-between; border-bottom: 1px dashed #444; padding: 10px 0; font-size: 0.9em; }
-        .carrinho-totais { margin-top: 20px; }
-        .linha-total { display: flex; justify-content: space-between; font-size: 1.2em; font-weight: bold; color: #d4af37; margin-bottom: 20px; }
-        .btn-confirmar { width: 100%; background: #5a1a1a; color: #fff; border: none; padding: 15px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1.1em; }
-    </style>
+    <link rel="stylesheet" href="CardapioGarcom.css">
 </head>
 <body>
 
     <header>
-        <h2 style="margin: 0;" id="tituloHeader">Mesa ... - Adicionar Itens</h2>
+
+        <h2 class="titulo-header" id="tituloHeader">
+            Mesa ... - Adicionar Itens
+        </h2>
+
+        <div class="usuario-info">
+
+            <strong id="headerNomeUsuario">
+                Carregando...
+            </strong><br>
+
+            <span id="headerPerfilUsuario">
+                ...
+            </span>
+
+        </div>
+
     </header>
 
-    <a href="#" class="btn-voltar" id="btnVoltar">← Voltar</a>
+    <a href="" class="btn-voltar" id="btnVoltar">
+        ← Voltar
+    </a>
 
     <div class="layout">
+
+        <!-- Conteúdo principal -->
         <div class="conteudo-principal">
-            
+
+            <!-- Seleção de cadeiras -->
             <div class="caixa-cadeiras">
+
                 <h3>
-                    <span>👤 Selecione a Cadeira</span>
-                    <span style="color: #aaa; font-size: 0.8em; font-weight: normal;" id="txtPessoasMesa">... pessoas na mesa</span>
+
+                    <span>
+                        👤 Selecione a Cadeira
+                    </span>
+
+                    <span class="texto-cadeiras" id="txtPessoasMesa">
+                        ... pessoas na mesa
+                    </span>
+
                 </h3>
+
                 <div class="botoes-cadeira" id="containerCadeiras">
-                    <button class="btn-cadeira ativo" data-cadeira="Sem Cadeira">Sem Cadeira</button>
-                    </div>
-                <p style="color: #aaa; font-size: 0.8em; margin-top: 15px;">💡 Selecione a cadeira antes de adicionar os itens ao carrinho</p>
+
+                    <button class="btn-cadeira ativo" data-cadeira="Sem Cadeira">
+                        Sem Cadeira
+                    </button>
+
+                </div>
+
+                <p class="texto-ajuda">
+                    💡 Selecione a cadeira antes de adicionar os itens ao carrinho
+                </p>
+
             </div>
 
+            <!-- Busca -->
             <div class="busca-container">
-                <input type="text" id="inputBusca" placeholder="🔍 Buscar produto...">
+
+                <input
+                    type="text"
+                    id="inputBusca"
+                    placeholder="🔍 Buscar produto..."
+                >
+
             </div>
+
+            <!-- Filtros -->
             <div class="filtros" id="botoesFiltro">
-                <button class="ativo" data-categoria="Todos">Todos</button>
-                <button data-categoria="Pratos Principais">Pratos Principais</button>
-                <button data-categoria="Entradas">Entradas</button>
-                <button data-categoria="Saladas">Saladas</button>
-                <button data-categoria="Sobremesas">Sobremesas</button>
-                <button data-categoria="Bebidas">Bebidas</button>
+
+                <button class="ativo" data-categoria="Todos">
+                    Todos
+                </button>
+
+                <button data-categoria="Pratos Principais">
+                    Pratos Principais
+                </button>
+
+                <button data-categoria="Entradas">
+                    Entradas
+                </button>
+
+                <button data-categoria="Saladas">
+                    Saladas
+                </button>
+
+                <button data-categoria="Sobremesas">
+                    Sobremesas
+                </button>
+
+                <button data-categoria="Bebidas">
+                    Bebidas
+                </button>
+
             </div>
 
+            <!-- Produtos -->
             <div id="listaProdutos">
-                <p style="color: #aaa;">Carregando cardápio...</p>
+
+                <p class="texto-loading">
+                    Carregando cardápio...
+                </p>
+
             </div>
 
         </div>
 
+        <!-- Sidebar -->
         <div class="sidebar">
+
             <div class="carrinho-box">
-                <h3>Carrinho</h3>
-                
+
+                <h3>
+                    Carrinho
+                </h3>
+
                 <div id="itensCarrinho">
-                    <p style="color: #777; text-align: center; margin: 30px 0;">Nenhum item selecionado</p>
+
+                    <p class="texto-vazio">
+                        Nenhum item selecionado
+                    </p>
+
                 </div>
 
-                <div class="carrinho-totais" id="boxTotais" style="display: none;">
-                    <div style="display: flex; justify-content: space-between; color: #aaa; margin-bottom: 10px;">
+                <div class="carrinho-totais escondido" id="boxTotais">
+
+                    <div class="linha-info">
+
                         <span>Itens</span>
-                        <strong id="qtdTotalItens">0</strong>
+
+                        <strong id="qtdTotalItens">
+                            0
+                        </strong>
+
                     </div>
+
                     <div class="linha-total">
+
                         <span>Total</span>
-                        <span id="valorTotalCarrinho">R$ 0.00</span>
+
+                        <span id="valorTotalCarrinho">
+                            R$ 0.00
+                        </span>
+
                     </div>
-                    <button class="btn-confirmar" id="btnConfirmarPedido">Confirmar Pedido</button>
+
+                    <button
+                        class="btn-confirmar"
+                        id="btnConfirmarPedido"
+                    >
+                        Confirmar Pedido
+                    </button>
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
 
     <script type="module" src="./CardapioGarcom.js"></script>
+
 </body>
 </html>

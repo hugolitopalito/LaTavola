@@ -1,0 +1,218 @@
+body {
+    font-family: sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-area h1 {
+    color: #d4af37;
+    margin: 0;
+}
+
+.logo-area span {
+    color: #aaa;
+    font-size: 0.9em;
+}
+
+.usuario-info {
+    text-align: right;
+}
+
+.usuario-info span {
+    color: #aaa;
+    font-size: 0.8em;
+}
+
+/* Classes utilitárias */
+.escondido {
+    display: none;
+}
+
+.text-green {
+    color: #2ecc71;
+}
+
+.text-yellow {
+    color: #f1c40f;
+}
+
+.text-gold {
+    color: #d4af37;
+}
+
+/* Estatísticas */
+.stats-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.stat-box {
+    flex: 1;
+    background: #2a2a2a;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.stat-box span {
+    display: block;
+    color: #aaa;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.stat-box strong {
+    font-size: 1.8em;
+}
+
+/* Seções */
+.secao-pedidos {
+    background: #2a2a2a;
+    border-radius: 8px;
+    border: 1px solid #333;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.secao-pedidos h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+}
+
+/* Cards de pedidos */
+.pedido-card {
+    background: #222;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    border: 1px solid #444;
+}
+
+.pedido-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.badge {
+    background: #1e4a28;
+    color: #2ecc71;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    border: 1px solid #2ecc71;
+}
+
+.pedido-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.info-block {
+    flex: 1;
+}
+
+.info-block span {
+    display: block;
+    color: #aaa;
+    font-size: 0.8em;
+    margin-bottom: 5px;
+}
+
+.info-block strong {
+    font-size: 1.1em;
+}
+
+.info-block .sub {
+    color: #777;
+    font-size: 0.9em;
+}
+
+.pedido-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #444;
+    padding-top: 15px;
+}
+
+/* Botões */
+.btn-aceitar {
+    background: #d4af37;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-aceitar:hover {
+    background: #f1c40f;
+}
+
+.btn-entregue {
+    background: #2ecc71;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-entregue:hover {
+    background: #27ae60;
+}
+
+/* Resumo */
+.resumo-grid {
+    display: flex;
+    gap: 15px;
+}
+
+.resumo-box {
+    flex: 1;
+    background: #222;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.resumo-box span {
+    display: block;
+    color: #aaa;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.resumo-box strong {
+    font-size: 2em;
+}
+
+/* Texto auxiliar */
+.texto-loading {
+    color: #aaa;
+}

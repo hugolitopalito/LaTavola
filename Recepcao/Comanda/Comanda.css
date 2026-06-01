@@ -1,0 +1,190 @@
+body {
+    font-family: sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header */
+
+header {
+    width: 100%;
+    max-width: 600px;
+
+    border-bottom: 1px solid #333;
+
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.titulo-header {
+    margin: 0;
+}
+
+/* Usuário */
+
+.usuario-info {
+    text-align: right;
+}
+
+.usuario-info span {
+    color: #aaa;
+    font-size: 0.8em;
+}
+
+/* Voltar */
+
+.container-voltar {
+    width: 100%;
+    max-width: 600px;
+}
+
+.btn-voltar {
+    background: #333;
+    color: #fff;
+
+    text-decoration: none;
+
+    padding: 8px 15px;
+    border-radius: 4px;
+
+    display: inline-block;
+
+    margin-bottom: 20px;
+}
+
+/* Formulário */
+
+.form-container {
+    background: #222;
+
+    border: 1px solid #333;
+    border-radius: 8px;
+
+    padding: 30px;
+
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Header formulário */
+
+.form-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+.icon-comanda {
+    background: #3a2a1a;
+    color: #d4af37;
+
+    padding: 15px;
+    border-radius: 8px;
+
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.titulo-formulario {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.descricao-formulario {
+    color: #aaa;
+    font-size: 0.85em;
+}
+
+/* Campos */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+input,
+select {
+    width: 100%;
+
+    padding: 12px;
+
+    background: #111;
+    color: #fff;
+
+    border: 1px solid #444;
+    border-radius: 4px;
+
+    box-sizing: border-box;
+}
+
+input:focus,
+select:focus {
+    border-color: #d4af37;
+    outline: none;
+}
+
+/* Campo readonly */
+
+input[readonly] {
+    background: #1a1a1a;
+    color: #d4af37;
+
+    border-color: #333;
+
+    cursor: not-allowed;
+
+    font-weight: bold;
+}
+
+/* Botões */
+
+.botoes {
+    display: flex;
+    gap: 15px;
+
+    margin-top: 30px;
+}
+
+.btn-cancelar,
+.btn-abrir {
+    flex: 1;
+
+    color: #fff;
+
+    border: none;
+    border-radius: 4px;
+
+    padding: 15px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.btn-cancelar {
+    background: #333;
+}
+
+.btn-abrir {
+    background: #5a1a1a;
+}

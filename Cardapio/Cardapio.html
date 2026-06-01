@@ -1,85 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cardápio - La Tavola</title>
-    <style>
-        body { font-family: sans-serif; display: flex; flex-direction: column; padding: 20px; }
-        .filtros { margin-bottom: 20px; }
-        .filtros button { margin-right: 10px; padding: 5px 15px; cursor: pointer; }
-        .layout { display: flex; gap: 30px; }
-        .produtos-container { flex: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .produto-card { border: 1px solid #ccc; padding: 15px; border-radius: 8px; text-align: center; }
-        .carrinho-container { flex: 1; border: 1px solid #000; padding: 20px; border-radius: 8px; background: #f9f9f9; }
-        .escondido { display: none !important; }
-        .item-carrinho { display: flex; justify-content: space-between; border-bottom: 1px dashed #ccc; padding: 10px 0; }
-        .form-cliente { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
-        .form-cliente input { padding: 8px; }
-        .totais { margin-top: 20px; text-align: right; }
-    </style>
-</head>
-<body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cardápio Delivery - La Tavola</title>
+    <link rel="stylesheet" href="Cardapio.css" />
+  </head>
+  <body>
     <header>
-        <h1>La Tavola</h1>
-        <p>Peça delivery agora</p>
+      <h1>La Tavola</h1>
+      <p>Faça seu pedido para Delivery</p>
     </header>
-
     <div class="filtros" id="botoesFiltro">
-        <button data-categoria="Todos">Todos</button>
-        <button data-categoria="Pratos Principais">Pratos Principais</button>
-        <button data-categoria="Entradas">Entradas</button>
-        <button data-categoria="Saladas">Saladas</button>
-        <button data-categoria="Sobremesas">Sobremesas</button>
-        <button data-categoria="Bebidas">Bebidas</button>
+      <button class="ativo" data-categoria="Todos">Todos do Cardápio</button>
+      <button data-categoria="Pratos Principais">Pratos Principais</button>
+      <button data-categoria="Entradas">Entradas</button>
+      <button data-categoria="Saladas">Saladas</button>
+      <button data-categoria="Sobremesas">Sobremesas</button>
+      <button data-categoria="Bebidas">Bebidas</button>
     </div>
-
     <main class="layout">
-        
-        <section class="produtos-container" id="listaCardapio">
-            <p>Carregando cardápio...</p>
-        </section>
-
-        <aside class="carrinho-container">
-            <h2>🛒 Seu Pedido (<span id="qtdItensTop">0</span> itens)</h2>
-
-            <div id="carrinhoVazio">
-                <p style="text-align: center; margin-top: 50px;">Carrinho vazio</p>
-                <p style="text-align: center; font-size: 12px;">Adicione itens do cardápio</p>
-            </div>
-
-            <div id="carrinhoCheio" class="escondido">
-                <div id="itensDoCarrinho">
-                    </div>
-
-                <div class="totais">
-                    <p>Subtotal: R$ <span id="valorSubtotal">0.00</span></p>
-                    <p>Taxa de Entrega: R$ <span id="valorTaxa">8.00</span></p>
-                    <h3>Total: R$ <span id="valorTotal">0.00</span></h3>
-                </div>
-
-                <div class="form-cliente">
-                    <label>Nome Completo</label>
-                    <input type="text" id="clienteNome" placeholder="Seu nome">
-                    
-                    <label>Telefone</label>
-                    <input type="text" id="clienteTelefone" placeholder="(00) 00000-0000">
-                    
-                    <label>Endereço Completo</label>
-                    <input type="text" id="clienteEndereco" placeholder="Rua, número, complemento">
-                    
-                    <label>Bairro</label>
-                    <input type="text" id="clienteBairro" placeholder="Seu bairro">
-
-                    <button id="btnFazerPedido" style="margin-top: 10px; padding: 15px; font-weight: bold; cursor: pointer;">Fazer Pedido</button>
-                </div>
-            </div>
-
-        </aside>
-
+      <section class="produtos-container" id="listaCardapio">
+        <p class="loading-cardapio">
+          Carregando o cardápio mais gostoso da cidade...
+        </p>
+      </section>
+      <aside class="carrinho-container">
+        <h2>🛒 Seu Carrinho (<span id="qtdItensTop">0</span>)</h2>
+        <div id="carrinhoVazio">
+          <p class="icone-carrinho">🛵</p>
+          <p class="texto-carrinho-vazio">
+            Seu carrinho está vazio.<br />
+            Adicione itens do cardápio ao lado.
+          </p>
+        </div>
+        <div id="carrinhoCheio" class="escondido">
+          <div id="itensDoCarrinho"></div>
+          <div class="totais">
+            <p>
+              Subtotal:
+              <span>R$ <span id="valorSubtotal">0.00</span></span>
+            </p>
+            <p>
+              Taxa de Entrega:
+              <span>R$ <span id="valorTaxa">0.00</span></span>
+            </p>
+            <h3>
+              Total:
+              <span>R$ <span id="valorTotal">0.00</span></span>
+            </h3>
+          </div>
+          <div class="form-cliente">
+            <label>Dados para Entrega</label>
+            <input
+              type="text"
+              id="clienteNome"
+              placeholder="Seu Nome Completo"
+            />
+            <input
+              type="text"
+              id="clienteTelefone"
+              placeholder="Telefone (Whatsapp)"
+            />
+            <input
+              type="text"
+              id="clienteEndereco"
+              placeholder="Endereço, Número e Complemento"
+            />
+            <input type="text" id="clienteBairro" placeholder="Seu Bairro" />
+            <button id="btnFazerPedido">Confirmar Pedido</button>
+          </div>
+        </div>
+      </aside>
     </main>
-
     <script type="module" src="./Cardapio.js"></script>
-</body>
+  </body>
 </html>

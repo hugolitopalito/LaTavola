@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - La Tavola</title>
+    <link rel="stylesheet" href="Index.css" />
+  </head>
+  <body>
+    <div class="brand-header">
+      <h1>La Tavola</h1>
+      <span> Sistema de Gestão de Restaurante </span>
+    </div>
+    <div class="login-box">
+      <h2>Login</h2>
+      <form id="formLogin">
+        <div class="form-group">
+          <label>Email</label>
+          <div class="input-wrapper">
+            <span>✉️</span>
+            <input
+              type="email"
+              id="emailInput"
+              placeholder="seu@email.com"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Senha</label>
+          <div class="input-wrapper">
+            <span>🔒</span>
+            <input
+              type="password"
+              id="senhaInput"
+              placeholder="••••••••"
+              required
+            />
+          </div>
+        </div>
+        <button type="submit" class="btn-entrar">Entrar</button>
+      </form>
+      <div class="demo-area">
+        <h3>Credenciais de Demonstração</h3>
+        <div class="demo-list">
+          <div class="demo-item">
+            <span class="demo-role"> Recepção/Atendimento: </span>
+            <span class="demo-email"> recepcao@restaurante.com </span>
+          </div>
+          <div class="demo-item">
+            <span class="demo-role"> Garçom: </span>
+            <span class="demo-email"> garcom@restaurante.com </span>
+          </div>
+          <div class="demo-item">
+            <span class="demo-role"> Cozinha: </span>
+            <span class="demo-email"> cozinha@restaurante.com </span>
+          </div>
+          <div class="demo-item">
+            <span class="demo-role"> Gerente: </span>
+            <span class="demo-email"> gerente@restaurante.com </span>
+          </div>
+          <div class="demo-item">
+            <span class="demo-role"> Entregador: </span>
+            <span class="demo-email"> entrega@restaurante.com </span>
+          </div>
+        </div>
+        <div class="demo-senha">Senha: 123456</div>
+        <a href="../Cardapio/Cardapio.html" class="link-cardapio">
+          ← Voltar para Cardápio
+        </a>
+      </div>
+    </div>
+    <script type="module" src="./Index.js"></script>
+  </body>
+</html>

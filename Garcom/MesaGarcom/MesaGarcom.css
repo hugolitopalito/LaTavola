@@ -1,0 +1,242 @@
+body {
+    font-family: sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.titulo-comanda {
+    margin: 0;
+}
+
+.usuario-info {
+    text-align: right;
+}
+
+.usuario-info span {
+    color: #aaa;
+    font-size: 0.8em;
+}
+
+/* Botão voltar */
+.btn-voltar {
+    background: #333;
+    color: #fff;
+
+    text-decoration: none;
+
+    padding: 8px 15px;
+    border-radius: 4px;
+
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+/* Card principal */
+.comanda-info {
+    background: #222;
+    border: 1px solid #333;
+
+    padding: 20px;
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+}
+
+.info-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid #444;
+
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.info-cliente {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.numero-comanda {
+    color: #e74c3c;
+    font-size: 1.2em;
+}
+
+.nome-mesa {
+    font-size: 1.3em;
+}
+
+.nome-cliente {
+    color: #aaa;
+}
+
+.info-total {
+    text-align: right;
+}
+
+.valor-total {
+    color: #d4af37;
+    font-size: 1.8em;
+}
+
+.texto-total {
+    color: #aaa;
+    font-size: 0.8em;
+}
+
+.info-bottom {
+    display: flex;
+    justify-content: space-between;
+
+    color: #aaa;
+    font-size: 0.9em;
+}
+
+.texto-branco {
+    color: #fff;
+}
+
+/* Botões de ação */
+.acoes-principais {
+    display: flex;
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.btn-add,
+.btn-fechar {
+    flex: 1;
+
+    border: none;
+
+    padding: 15px;
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.btn-add {
+    background: #5a1a1a;
+    color: #fff;
+}
+
+.btn-fechar {
+    background: #d4af37;
+    color: #000;
+}
+
+/* Abas */
+.abas {
+    display: flex;
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+.aba {
+    flex: 1;
+
+    text-align: center;
+
+    padding: 12px;
+
+    background: #333;
+    color: #fff;
+
+    border-radius: 6px;
+    border: 1px solid #444;
+
+    cursor: pointer;
+}
+
+.aba.ativa {
+    background: #d4af37;
+    color: #000;
+
+    font-weight: bold;
+
+    border-color: #d4af37;
+}
+
+/* Lista */
+.secao-itens {
+    background: #222;
+
+    border-radius: 8px;
+    border: 1px solid #333;
+
+    padding: 20px;
+}
+
+.titulo-secao {
+    margin-top: 0;
+
+    border-bottom: 1px solid #444;
+
+    padding-bottom: 10px;
+}
+
+.item-pedido {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #333;
+}
+
+.item-pedido:last-child {
+    border-bottom: none;
+}
+
+/* Tags de status */
+.tag-status {
+    display: inline-block;
+
+    padding: 4px 8px;
+
+    border-radius: 4px;
+
+    font-size: 0.75em;
+
+    margin-top: 5px;
+}
+
+.tag-entregue {
+    background: #1e4a28;
+    color: #2ecc71;
+}
+
+.tag-preparo {
+    background: #5c3a1e;
+    color: #e67e22;
+}
+
+.tag-pendente {
+    background: #444;
+    color: #ccc;
+}
+
+/* Texto auxiliar */
+.texto-vazio {
+    color: #aaa;
+}

@@ -1,100 +1,128 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão de Produtos</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestão de Produtos - La Tavola</title>
+    <link rel="stylesheet" href="Produto.css" />
+  </head>
+  <body>
     <header>
-        <h1>Gestão de Produtos</h1>
-        <button id="btnNovoProduto">+ Novo Produto</button>
+      <div class="brand">
+        <h1>La Tavola</h1>
+        <span>Sistema de Gestão</span>
+      </div>
+      <div class="usuario-info">
+        <strong id="headerNomeUsuario"> Carregando... </strong><br />
+        <span id="headerPerfilUsuario"> Gerente </span>
+      </div>
     </header>
-
-    <main>
-        <table id="tabelaProdutos">
-            <thead>
-                <tr>
-                    <th>Produto</th>
-                    <th>Categoria</th>
-                    <th>Preço</th>
-                    <th>Status</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody id="listaProdutos">
-            </tbody>
-        </table>
+    <h2>Gestão de Produtos</h2>
+    <button
+      class="btn-voltar"
+      onclick="window.location.href='../DashBoard.html'"
+    >
+      ← Voltar
+    </button>
+    <div class="sub-header-row">
+      <p>Gerencie os produtos do cardápio do restaurante</p>
+      <button id="btnNovoProduto" class="btn-novo">+ Novo Produto</button>
+    </div>
+    <main class="table-container">
+      <table id="tabelaProdutos">
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Categoria</th>
+            <th>Preço</th>
+            <th>Custo</th>
+            <th>Margem</th>
+            <th class="text-center">Vendas</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="listaProdutos">
+          <tr>
+            <td colspan="8" class="loading-cell">Carregando produtos...</td>
+          </tr>
+        </tbody>
+      </table>
     </main>
-
-    <div id="modalNovo" style="display: none;">
-        <div class="modal-content">
-            <span class="close-btn" id="fecharModalNovo">&times;</span>
-            <h2>Novo Produto</h2>
-            <form id="formNovo">
-                <label for="novoNome">Nome do Produto</label>
-                <input type="text" id="novoNome" required>
-
-                <label for="novaCategoria">Categoria</label>
-                <select id="novaCategoria" required>
-                    <option value="">Selecione uma categoria...</option>
-                    <option value="Pratos Principais">Pratos Principais</option>
-                    <option value="Entradas">Entradas</option>
-                    <option value="Saladas">Saladas</option>
-                    <option value="Sobremesas">Sobremesas</option>
-                    <option value="Bebidas">Bebidas</option>
-                </select>
-
-                <label for="novoPreco">Preço (R$)</label>
-                <input type="number" id="novoPreco" step="0.01" required>
-
-                <label>
-                    <input type="checkbox" id="novoStatus" checked> Produto ativo no cardápio
-                </label>
-
-                <div class="modal-actions">
-                    <button type="button" id="btnCancelarNovo">Cancelar</button>
-                    <button type="submit">Criar</button>
-                </div>
-            </form>
-        </div>
+    <div id="modalNovo" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" id="fecharModalNovo"> &times; </span>
+        <h2>Novo Produto</h2>
+        <form id="formNovo">
+          <label for="novoNome"> Nome do Produto </label>
+          <input
+            type="text"
+            id="novoNome"
+            placeholder="Ex: Risoto de Camarão"
+            required
+          />
+          <label for="novaCategoria"> Categoria </label>
+          <select id="novaCategoria" required>
+            <option value="">Selecione uma categoria...</option>
+            <option value="Pratos Principais">Pratos Principais</option>
+            <option value="Entradas">Entradas</option>
+            <option value="Saladas">Saladas</option>
+            <option value="Sobremesas">Sobremesas</option>
+            <option value="Bebidas">Bebidas</option>
+          </select>
+          <label for="novoPreco"> Preço (R$) </label>
+          <input
+            type="number"
+            id="novoPreco"
+            step="0.01"
+            placeholder="0.00"
+            required
+          />
+          <label class="checkbox-group">
+            <input type="checkbox" id="novoStatus" checked />
+            Produto ativo no cardápio
+          </label>
+          <div class="modal-actions">
+            <button type="button" class="btn-cancel" id="btnCancelarNovo">
+              Cancelar
+            </button>
+            <button type="submit" class="btn-save">Criar Produto</button>
+          </div>
+        </form>
+      </div>
     </div>
-
-    <div id="modalEditar" style="display: none;">
-        <div class="modal-content">
-            <span class="close-btn" id="fecharModalEditar">&times;</span>
-            <h2>Editar Produto</h2>
-            <form id="formEditar">
-                <input type="hidden" id="editId">
-                
-                <label for="editNome">Nome do Produto</label>
-                <input type="text" id="editNome" required>
-
-                <label for="editCategoria">Categoria</label>
-                <select id="editCategoria" required>
-                    <option value="">Selecione uma categoria...</option>
-                    <option value="Pratos Principais">Pratos Principais</option>
-                    <option value="Entradas">Entradas</option>
-                    <option value="Saladas">Saladas</option>
-                    <option value="Sobremesas">Sobremesas</option>
-                    <option value="Bebidas">Bebidas</option>
-                </select>
-
-                <label for="editPreco">Preço (R$)</label>
-                <input type="number" id="editPreco" step="0.01" required>
-
-                <label>
-                    <input type="checkbox" id="editStatus"> Produto ativo no cardápio
-                </label>
-
-                <div class="modal-actions">
-                    <button type="button" id="btnCancelarEditar">Cancelar</button>
-                    <button type="submit">Salvar</button>
-                </div>
-            </form>
-        </div>
+    <div id="modalEditar" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" id="fecharModalEditar"> &times; </span>
+        <h2>Editar Produto</h2>
+        <form id="formEditar">
+          <input type="hidden" id="editId" />
+          <label for="editNome"> Nome do Produto </label>
+          <input type="text" id="editNome" required />
+          <label for="editCategoria"> Categoria </label>
+          <select id="editCategoria" required>
+            <option value="">Selecione uma categoria...</option>
+            <option value="Pratos Principais">Pratos Principais</option>
+            <option value="Entradas">Entradas</option>
+            <option value="Saladas">Saladas</option>
+            <option value="Sobremesas">Sobremesas</option>
+            <option value="Bebidas">Bebidas</option>
+          </select>
+          <label for="editPreco"> Preço (R$) </label>
+          <input type="number" id="editPreco" step="0.01" required />
+          <label class="checkbox-group">
+            <input type="checkbox" id="editStatus" />
+            Produto ativo no cardápio
+          </label>
+          <div class="modal-actions">
+            <button type="button" class="btn-cancel" id="btnCancelarEditar">
+              Cancelar
+            </button>
+            <button type="submit" class="btn-save">Salvar Alterações</button>
+          </div>
+        </form>
+      </div>
     </div>
-
-    <script type="module" src="Produto.js"></script>
-</body>
+    <script type="module" src="./Produto.js"></script>
+  </body>
 </html>

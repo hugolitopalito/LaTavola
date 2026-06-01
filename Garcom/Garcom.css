@@ -1,0 +1,161 @@
+body {
+    font-family: sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-area h1 {
+    color: #d4af37;
+    margin: 0;
+}
+
+.logo-area span {
+    color: #aaa;
+    font-size: 0.9em;
+}
+
+.usuario-info {
+    text-align: right;
+}
+
+.usuario-info span {
+    color: #aaa;
+    font-size: 0.8em;
+}
+
+/* Sugestão estratégica */
+.sugestao-box {
+    background: linear-gradient(
+        135deg,
+        #3a2a1a 0%,
+        #1a1a1a 100%
+    );
+
+    border: 1px solid #d4af37;
+    padding: 20px;
+    border-radius: 8px;
+
+    margin-bottom: 30px;
+
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.icone-estrela {
+    background: #d4af37;
+    color: #000;
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.titulo-sugestao {
+    color: #d4af37;
+    font-size: 1.1em;
+}
+
+.sugestao-conteudo h3 {
+    margin: 5px 0;
+}
+
+.info-produto {
+    color: #aaa;
+    font-size: 0.85em;
+}
+
+.texto-sugestao {
+    margin: 5px 0 0 0;
+    font-size: 0.9em;
+}
+
+/* Seção mesas */
+.secao-mesas {
+    background: #222;
+    border-radius: 8px;
+    border: 1px solid #333;
+    padding: 20px;
+}
+
+.titulo-mesas {
+    margin-top: 0;
+    border-bottom: 1px solid #444;
+    padding-bottom: 15px;
+}
+
+/* Itens das mesas */
+.mesa-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px 0;
+
+    border-bottom: 1px solid #333;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.mesa-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.mesa-item:last-child {
+    border-bottom: none;
+}
+
+/* Status */
+.status-badge {
+    display: inline-block;
+
+    padding: 4px 10px;
+
+    border-radius: 20px;
+
+    font-size: 0.75em;
+    font-weight: bold;
+
+    margin-top: 5px;
+}
+
+.badge-preparo {
+    background: #5c3a1e;
+    color: #e67e22;
+}
+
+.badge-pendente {
+    background: #333;
+    color: #aaa;
+}
+
+.badge-pronto {
+    background: #1e3a5f;
+    color: #3498db;
+}
+
+/* Texto vazio */
+.texto-vazio {
+    color: #777;
+}

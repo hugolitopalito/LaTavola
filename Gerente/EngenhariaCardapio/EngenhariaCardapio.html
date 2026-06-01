@@ -1,173 +1,137 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Engenharia de Cardápio - La Tavola</title>
-    <style>
-        body { font-family: sans-serif; background-color: #121212; color: #fff; padding: 20px; margin: 0; padding-bottom: 50px; }
-        header { border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
-        
-        .btn-voltar { background: #2a2a2a; color: #fff; border: 1px solid #444; text-decoration: none; padding: 10px 20px; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; cursor: pointer; }
-        .btn-voltar:hover { background: #333; }
-
-        /* Box de Informação */
-        .info-box { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 20px; margin-bottom: 25px; }
-        .info-box h3 { margin-top: 0; color: #fff; font-size: 1.1em; display: flex; align-items: center; gap: 10px; }
-        .info-box p { color: #aaa; font-size: 0.9em; margin: 0; line-height: 1.5; }
-
-        /* Cards de Resumo */
-        .resumo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 25px; }
-        .card-resumo { background: #1a1a1a; border: 1px solid #333; padding: 20px; border-radius: 8px; display: flex; flex-direction: column; justify-content: space-between; }
-        .card-resumo-top { display: flex; justify-content: space-between; align-items: flex-start; }
-        .card-resumo-top .icone { font-size: 1.5em; }
-        .card-resumo-top strong { font-size: 1.8em; color: #fff; }
-        .card-resumo h4 { margin: 10px 0 5px 0; font-size: 1em; color: #fff; }
-        .card-resumo span { color: #aaa; font-size: 0.8em; }
-
-        /* Controles (Filtro e Botão) */
-        .controls-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .filtro-container { display: flex; align-items: center; gap: 10px; }
-        .filtro-container select { background: #2a2a2a; color: #fff; border: 1px solid #444; padding: 10px 15px; border-radius: 6px; font-size: 0.9em; outline: none; }
-        .btn-matriz { background: #8b0000; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
-        .btn-matriz:hover { background: #a52a2a; }
-
-        /* Tabela */
-        .table-container { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; overflow-x: auto; margin-bottom: 25px; }
-        table { width: 100%; border-collapse: collapse; text-align: left; }
-        th { padding: 15px; color: #fff; font-size: 0.85em; font-weight: bold; border-bottom: 1px solid #333; }
-        td { padding: 15px; border-bottom: 1px solid #222; vertical-align: middle; font-size: 0.9em; color: #ddd; }
-        tr:hover { background-color: #222; }
-        
-        .td-destaque { color: #d4af37; font-weight: bold; }
-        .texto-secundario { color: #777; font-size: 0.85em; display: block; margin-top: 4px; }
-        .emoji-classificacao { font-size: 1.5em; text-align: center; }
-
-        /* Barra de Popularidade */
-        .bar-bg { width: 80px; height: 6px; background: #333; border-radius: 3px; overflow: hidden; margin-bottom: 5px; }
-        .bar-fill { height: 100%; background: #d4af37; }
-
-        /* Critérios Footer */
-        .criterios-box { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .criterios-box h4 { margin-top: 0; color: #fff; font-size: 1em; grid-column: span 2; margin-bottom: 10px; }
-        .criterio-col { color: #aaa; font-size: 0.85em; line-height: 1.6; }
-        .criterio-col strong { color: #fff; display: block; margin-bottom: 5px; font-size: 1.05em; }
-    </style>
-</head>
-<body>
-
+    <link rel="stylesheet" href="EngenhariaCardapio.css" />
+  </head>
+  <body>
     <header>
-        <div>
-            <h1 style="color: #d4af37; margin: 0;">La Tavola</h1>
-            <span style="color: #aaa; font-size: 0.9em;">Sistema de Gestão</span>
-        </div>
-        <div style="text-align: right;">
-            <strong>Ana Gerente</strong><br>
-            <span style="color: #aaa; font-size: 0.8em;">Gerente</span>
-        </div>
+      <div class="brand">
+        <h1>La Tavola</h1>
+        <span>Sistema de Gestão</span>
+      </div>
+      <div class="usuario-info">
+        <strong id="headerNomeUsuario"> Carregando... </strong><br />
+        <span id="headerPerfilUsuario"> ... </span>
+      </div>
     </header>
-
-    <h2 style="margin-bottom: 20px;">Engenharia de Cardápio</h2>
-    <button class="btn-voltar" onclick="window.location.href='../DashBoard.html'">← Voltar</button>
-
+    <h2 class="titulo-pagina">Engenharia de Cardápio</h2>
+    <button
+      class="btn-voltar"
+      onclick="window.location.href='../DashBoard.html'"
+    >
+      ← Voltar
+    </button>
     <div class="info-box">
-        <h3>↗ Análise Estratégica do Cardápio</h3>
-        <p>Este módulo classifica cada produto do cardápio baseado em margem de lucro e popularidade, oferecendo recomendações estratégicas para maximizar a rentabilidade do restaurante.</p>
+      <h3>↗ Análise Estratégica do Cardápio</h3>
+      <p>
+        Este módulo classifica cada produto do cardápio baseado em margem de
+        lucro e popularidade, oferecendo recomendações estratégicas para
+        maximizar a rentabilidade do restaurante.
+      </p>
     </div>
-
     <div class="resumo-grid">
-        <div class="card-resumo">
-            <div class="card-resumo-top">
-                <div class="icone">⭐</div>
-                <strong id="totEstrelas">0</strong>
-            </div>
-            <div>
-                <h4>Estrela</h4>
-                <span>Alta margem + Popular</span>
-            </div>
+      <div class="card-resumo">
+        <div class="card-resumo-top">
+          <div class="icone">⭐</div>
+          <strong id="totEstrelas"> 0 </strong>
         </div>
-        <div class="card-resumo">
-            <div class="card-resumo-top">
-                <div class="icone">🐎</div>
-                <strong id="totCavalos">0</strong>
-            </div>
-            <div>
-                <h4>Cavalo de Batalha</h4>
-                <span>Baixa margem + Popular</span>
-            </div>
+        <div>
+          <h4>Estrela</h4>
+          <span> Alta margem + Popular </span>
         </div>
-        <div class="card-resumo">
-            <div class="card-resumo-top">
-                <div class="icone">🧩</div>
-                <strong id="totQuebras">0</strong>
-            </div>
-            <div>
-                <h4>Quebra-Cabeça</h4>
-                <span>Alta margem + Pouco popular</span>
-            </div>
+      </div>
+      <div class="card-resumo">
+        <div class="card-resumo-top">
+          <div class="icone">🐎</div>
+          <strong id="totCavalos"> 0 </strong>
         </div>
-        <div class="card-resumo">
-            <div class="card-resumo-top">
-                <div class="icone">🐶</div>
-                <strong id="totCaes">0</strong>
-            </div>
-            <div>
-                <h4>Cão</h4>
-                <span>Baixa margem + Pouco popular</span>
-            </div>
+        <div>
+          <h4>Cavalo de Batalha</h4>
+          <span> Baixa margem + Popular </span>
         </div>
+      </div>
+      <div class="card-resumo">
+        <div class="card-resumo-top">
+          <div class="icone">🧩</div>
+          <strong id="totQuebras"> 0 </strong>
+        </div>
+        <div>
+          <h4>Quebra-Cabeça</h4>
+          <span> Alta margem + Pouco popular </span>
+        </div>
+      </div>
+      <div class="card-resumo">
+        <div class="card-resumo-top">
+          <div class="icone">🐶</div>
+          <strong id="totCaes"> 0 </strong>
+        </div>
+        <div>
+          <h4>Cão</h4>
+          <span> Baixa margem + Pouco popular </span>
+        </div>
+      </div>
     </div>
-
     <div class="controls-row">
-        <div class="filtro-container">
-            <span style="color: #aaa;">▽</span>
-            <select id="filtroCategoria">
-                <option value="Todas">Todas as Categorias</option>
-                <option value="Pratos Principais">Pratos Principais</option>
-                <option value="Entradas">Entradas</option>
-                <option value="Saladas">Saladas</option>
-                <option value="Sobremesas">Sobremesas</option>
-                <option value="Bebidas">Bebidas</option>
-            </select>
-        </div>
-        <button class="btn-matriz" onclick="window.location.href='../Matriz/Matriz.html'">📊 Ver Matriz Gráfica</button>
+      <div class="filtro-container">
+        <span class="icone-filtro"> ▽ </span>
+        <select id="filtroCategoria">
+          <option value="Todas">Todas as Categorias</option>
+          <option value="Pratos Principais">Pratos Principais</option>
+          <option value="Entradas">Entradas</option>
+          <option value="Saladas">Saladas</option>
+          <option value="Sobremesas">Sobremesas</option>
+          <option value="Bebidas">Bebidas</option>
+        </select>
+      </div>
+      <button
+        class="btn-matriz"
+        onclick="window.location.href='../Matriz/Matriz.html'"
+      >
+        📊 Ver Matriz Gráfica
+      </button>
     </div>
-
     <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Produto</th>
-                    <th>Categoria</th>
-                    <th>Preço</th>
-                    <th>Custo</th>
-                    <th>Margem</th>
-                    <th>Vendas</th>
-                    <th>Popularidade</th>
-                    <th style="text-align: center;">Classificação</th>
-                    <th>Recomendação</th>
-                </tr>
-            </thead>
-            <tbody id="listaEngenharia">
-                <tr><td colspan="9" style="text-align: center; color: #777; padding: 30px;">Carregando dados...</td></tr>
-            </tbody>
-        </table>
+      <table>
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Categoria</th>
+            <th>Preço</th>
+            <th>Custo</th>
+            <th>Margem</th>
+            <th>Vendas</th>
+            <th>Popularidade</th>
+            <th class="text-center">Classificação</th>
+            <th>Recomendação</th>
+          </tr>
+        </thead>
+        <tbody id="listaEngenharia">
+          <tr>
+            <td colspan="9" class="loading-cell">Carregando dados...</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
     <div class="criterios-box">
-        <h4>Critérios de Classificação</h4>
-        <div class="criterio-col">
-            <strong>Margem de Lucro:</strong>
-            • Alta: Acima de <span id="txtMargemMedia">...</span>%<br>
-            • Baixa: Abaixo de <span id="txtMargemMedia2">...</span>%
-        </div>
-        <div class="criterio-col">
-            <strong>Popularidade:</strong>
-            • Alta: Vendas acima da média (<span id="txtMediaVendas">...</span> unidades)<br>
-            • Baixa: Vendas abaixo da média
-        </div>
+      <h4>Critérios de Classificação</h4>
+      <div class="criterio-col">
+        <strong> Margem de Lucro: </strong>
+        • Alta: Acima de
+        <span id="txtMargemMedia"> ... </span>%<br />
+        • Baixa: Abaixo de
+        <span id="txtMargemMedia2"> ... </span>%
+      </div>
+      <div class="criterio-col">
+        <strong> Popularidade: </strong>
+        • Alta: Vendas acima da média (
+        <span id="txtMediaVendas"> ... </span>
+        unidades )<br />
+        • Baixa: Vendas abaixo da média
+      </div>
     </div>
-
     <script type="module" src="./EngenhariaCardapio.js"></script>
-</body>
+  </body>
 </html>

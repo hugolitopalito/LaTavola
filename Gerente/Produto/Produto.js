@@ -1,161 +1,239 @@
-    // Importações exclusivas via CDN (Vanilla JS)
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { 
-        getFirestore, 
-        collection, 
-        addDoc, 
-        getDocs, 
-        doc, 
-        updateDoc, 
-        deleteDoc 
-    } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  doc,
+  updateDoc,
+  deleteDoc,
+  onSnapshot,
+} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-    // SUAS CREDENCIAIS DO FIREBASE
-    const firebaseConfig = {
-        apiKey: "AIzaSyBayur0I7uCelwae7NVXot19cYOD2fa0ro",
-        authDomain: "latavola-99df2.firebaseapp.com",
-        projectId: "latavola-99df2",
-        storageBucket: "latavola-99df2.firebasestorage.app",
-        messagingSenderId: "336225970527",
-        appId: "1:336225970527:web:5f60e799c507931143aeea",
-        measurementId: "G-XF8PMT0KGV"
-    };
+// ==========================================
+// 1. LÓGICA DO CABEÇALHO DINÂMICO
+// ==========================================
+const nomeLogado = localStorage.getItem('usuarioLogado');
+const perfilLogado = localStorage.getItem('perfilLogado');
 
-    // Inicialização
-    const app = initializeApp(firebaseConfig);
+const elNome = document.getElementById('headerNomeUsuario');
+const elPerfil = document.getElementById('headerPerfilUsuario');
 
-    // INICIALIZAÇÃO DO FIRESTORE (A linha que faltava)
-    const db = getFirestore(app); 
-    const produtosRef = collection(db, "produtos");
-
-    // Elementos do DOM
-    const listaProdutos = document.getElementById('listaProdutos');
-
-    // Elementos - Modal Novo
-    const modalNovo = document.getElementById('modalNovo');
-    const btnNovoProduto = document.getElementById('btnNovoProduto');
-    const btnCancelarNovo = document.getElementById('btnCancelarNovo');
-    const fecharModalNovo = document.getElementById('fecharModalNovo');
-    const formNovo = document.getElementById('formNovo');
-
-    // Elementos - Modal Editar
-    const modalEditar = document.getElementById('modalEditar');
-    const btnCancelarEditar = document.getElementById('btnCancelarEditar');
-    const fecharModalEditar = document.getElementById('fecharModalEditar');
-    const formEditar = document.getElementById('formEditar');
-
-    // Controle de Modais
-    btnNovoProduto.onclick = () => modalNovo.style.display = 'block';
-    btnCancelarNovo.onclick = () => modalNovo.style.display = 'none';
-    fecharModalNovo.onclick = () => modalNovo.style.display = 'none';
-
-    btnCancelarEditar.onclick = () => modalEditar.style.display = 'none';
-    fecharModalEditar.onclick = () => modalEditar.style.display = 'none';
-
-    // Carregar Produtos (Read)
-    async function carregarProdutos() {
-        listaProdutos.innerHTML = '';
-        const querySnapshot = await getDocs(produtosRef);
-        
-        querySnapshot.forEach((documento) => {
-            const produto = documento.data();
-            const id = documento.id;
-            const statusTexto = produto.ativo ? 'Ativo' : 'Inativo';
-            
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${produto.nome}</td>
-                <td>${produto.categoria}</td>
-                <td>R$ ${Number(produto.preco).toFixed(2)}</td>
-                <td>${statusTexto}</td>
-                <td>
-                    <button class="btn-editar" data-id="${id}">Editar</button>
-                    <button class="btn-excluir" data-id="${id}">Excluir</button>
-                </td>
-            `;
-            listaProdutos.appendChild(tr);
-        });
-
-        adicionarEventosBotoesAcao();
+if (elNome && elPerfil) {
+    if (nomeLogado && perfilLogado) {
+        elNome.innerText = nomeLogado;
+        elPerfil.innerText = perfilLogado;
+    } else {
+        elNome.innerText = "Visitante";
+        elPerfil.innerText = "Sem Perfil";
     }
+}
+// ==========================================
 
-    // Criar Produto (Create)
-    formNovo.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const novoProduto = {
-            nome: document.getElementById('novoNome').value,
-            categoria: document.getElementById('novaCategoria').value,
-            preco: parseFloat(document.getElementById('novoPreco').value),
-            ativo: document.getElementById('novoStatus').checked
-        };
+// SUAS CREDENCIAIS DO FIREBASE
+const firebaseConfig = {
+  apiKey: "AIzaSyBayur0I7uCelwae7NVXot19cYOD2fa0ro",
+  authDomain: "latavola-99df2.firebaseapp.com",
+  projectId: "latavola-99df2",
+  storageBucket: "latavola-99df2.firebasestorage.app",
+  messagingSenderId: "336225970527",
+  appId: "1:336225970527:web:5f60e799c507931143aeea",
+  measurementId: "G-XF8PMT0KGV",
+};
 
-        await addDoc(produtosRef, novoProduto);
-        formNovo.reset();
-        modalNovo.style.display = 'none';
-        carregarProdutos();
-    });
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-    // Editar Produto (Update)
-    formEditar.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const id = document.getElementById('editId').value;
-        const docRef = doc(db, "produtos", id);
-        
-        const dadosAtualizados = {
-            nome: document.getElementById('editNome').value,
-            categoria: document.getElementById('editCategoria').value,
-            preco: parseFloat(document.getElementById('editPreco').value),
-            ativo: document.getElementById('editStatus').checked
-        };
+const produtosRef = collection(db, "produtos");
+const pedidosRef = collection(db, "pedidos");
 
-        await updateDoc(docRef, dadosAtualizados);
-        modalEditar.style.display = 'none';
-        carregarProdutos();
-    });
+const listaProdutos = document.getElementById("listaProdutos");
 
-    // Excluir Produto (Delete)
-    async function deletarProduto(id) {
-        if(confirm("Tem certeza que deseja excluir este produto?")) {
-            const docRef = doc(db, "produtos", id);
-            await deleteDoc(docRef);
-            carregarProdutos();
+// Modais e Botoes
+const modalNovo = document.getElementById("modalNovo");
+const modalEditar = document.getElementById("modalEditar");
+const formNovo = document.getElementById("formNovo");
+const formEditar = document.getElementById("formEditar");
+
+document.getElementById("btnNovoProduto").onclick = () =>
+  (modalNovo.style.display = "block");
+document.getElementById("btnCancelarNovo").onclick = () =>
+  (modalNovo.style.display = "none");
+document.getElementById("fecharModalNovo").onclick = () =>
+  (modalNovo.style.display = "none");
+
+document.getElementById("btnCancelarEditar").onclick = () =>
+  (modalEditar.style.display = "none");
+document.getElementById("fecharModalEditar").onclick = () =>
+  (modalEditar.style.display = "none");
+
+// MEMÓRIA DE DADOS (Para calcular Vendas, Margem e Custo automaticamente)
+let produtosTemp = [];
+let pedidosTemp = [];
+
+// 1. ESCUTAR PRODUTOS EM TEMPO REAL
+onSnapshot(produtosRef, (snapshot) => {
+  produtosTemp = [];
+  snapshot.forEach((documento) => {
+    produtosTemp.push({ id: documento.id, ...documento.data() });
+  });
+  renderizarTabela();
+});
+
+// 2. ESCUTAR PEDIDOS (Para contar Vendas)
+onSnapshot(pedidosRef, (snapshot) => {
+  pedidosTemp = [];
+  snapshot.forEach((doc) => {
+    pedidosTemp.push(doc.data());
+  });
+  renderizarTabela();
+});
+
+// 3. RENDERIZAR TABELA ENRIQUECIDA
+function renderizarTabela() {
+  listaProdutos.innerHTML = "";
+
+  if (produtosTemp.length === 0) {
+    listaProdutos.innerHTML =
+      '<tr><td colspan="8" style="text-align: center; color: #777; padding: 30px;">Nenhum produto cadastrado no cardápio.</td></tr>';
+    return;
+  }
+
+  produtosTemp.forEach((produto) => {
+    // Lógica Matemática de Custo e Margem (A mesma da Engenharia)
+    let charSum = 0;
+    for (let i = 0; i < produto.nome.length; i++) {
+      charSum += produto.nome.charCodeAt(i);
+    }
+    let margem = 30 + (charSum % 55);
+
+    let preco = Number(produto.preco) || 0;
+    let lucroReais = preco * (margem / 100);
+    let custo = preco - lucroReais;
+
+    // Lógica para Contar Vendas desse produto
+    let qtdVendida = 0;
+    pedidosTemp.forEach((pedido) => {
+      if (
+        pedido.status !== "Recusado" &&
+        pedido.status !== "Aguardando Aprovação"
+      ) {
+        if (pedido.itens) {
+          pedido.itens.forEach((item) => {
+            if (item.nome === produto.nome) {
+              qtdVendida += Number(item.quantidade);
+            }
+          });
         }
-    }
+      }
+    });
 
-    // Vincula os eventos aos botões gerados dinamicamente na tabela
-    function adicionarEventosBotoesAcao() {
-        const botoesEditar = document.querySelectorAll('.btn-editar');
-        const botoesExcluir = document.querySelectorAll('.btn-excluir');
+    // Visuais
+    const statusHTML = produto.ativo
+      ? '<span class="badge-ativo">Ativo</span>'
+      : '<span class="badge-inativo">Inativo</span>';
 
-        botoesEditar.forEach(btn => {
-            btn.addEventListener('click', async (e) => {
-                const id = e.target.getAttribute('data-id');
-                const linha = e.target.closest('tr');
-                const nome = linha.children[0].innerText;
-                const categoria = linha.children[1].innerText;
-                const preco = linha.children[2].innerText.replace('R$ ', '');
-                const ativo = linha.children[3].innerText === 'Ativo';
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+            <td class="td-nome">${produto.nome}</td>
+            <td class="td-cat">${produto.categoria}</td>
+            <td class="td-preco">R$ ${preco.toFixed(2)}</td>
+            <td class="td-custo">R$ ${custo.toFixed(2)}</td>
+            <td class="td-margem">${margem.toFixed(1)}%</td>
+            <td class="td-vendas" style="text-align: center;">${qtdVendida}</td>
+            <td>${statusHTML}</td>
+            <td>
+                <div class="acoes-container">
+                    <button class="icon-btn btn-editar" title="Editar Produto" data-id="${
+                      produto.id
+                    }">📝</button>
+                    <button class="icon-btn btn-excluir" title="Desativar/Excluir" data-id="${
+                      produto.id
+                    }">⏻</button>
+                </div>
+            </td>
+        `;
+    listaProdutos.appendChild(tr);
+  });
 
-                // Preenche o modal
-                document.getElementById('editId').value = id;
-                document.getElementById('editNome').value = nome;
-                document.getElementById('editCategoria').value = categoria;
-                document.getElementById('editPreco').value = preco;
-                document.getElementById('editStatus').checked = ativo;
+  adicionarEventosBotoesAcao();
+}
 
-                modalEditar.style.display = 'block';
-            });
-        });
+// 4. AÇÕES CRUD (CRIAR, EDITAR, DELETAR)
+formNovo.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btnSubmit = formNovo.querySelector('button[type="submit"]');
+  btnSubmit.innerText = "Salvando...";
+  btnSubmit.disabled = true;
 
-        botoesExcluir.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const id = e.target.getAttribute('data-id');
-                deletarProduto(id);
-            });
-        });
-    }
+  try {
+    const novoProduto = {
+      nome: document.getElementById("novoNome").value,
+      categoria: document.getElementById("novaCategoria").value,
+      preco: parseFloat(document.getElementById("novoPreco").value),
+      ativo: document.getElementById("novoStatus").checked,
+    };
+    await addDoc(produtosRef, novoProduto);
+    formNovo.reset();
+    modalNovo.style.display = "none";
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao criar produto");
+  } finally {
+    btnSubmit.innerText = "Criar Produto";
+    btnSubmit.disabled = false;
+  }
+});
 
-    // Inicia a aplicação carregando a tabela
-    carregarProdutos();
+formEditar.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btnSubmit = formEditar.querySelector('button[type="submit"]');
+  btnSubmit.innerText = "Salvando...";
+  btnSubmit.disabled = true;
+
+  try {
+    const id = document.getElementById("editId").value;
+    const docRef = doc(db, "produtos", id);
+    const dadosAtualizados = {
+      nome: document.getElementById("editNome").value,
+      categoria: document.getElementById("editCategoria").value,
+      preco: parseFloat(document.getElementById("editPreco").value),
+      ativo: document.getElementById("editStatus").checked,
+    };
+    await updateDoc(docRef, dadosAtualizados);
+    modalEditar.style.display = "none";
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao atualizar produto");
+  } finally {
+    btnSubmit.innerText = "Salvar Alterações";
+    btnSubmit.disabled = false;
+  }
+});
+
+function adicionarEventosBotoesAcao() {
+  document.querySelectorAll(".btn-editar").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const id = e.target.closest("button").getAttribute("data-id");
+      const produtoParaEditar = produtosTemp.find((p) => p.id === id);
+
+      if (produtoParaEditar) {
+        document.getElementById("editId").value = id;
+        document.getElementById("editNome").value = produtoParaEditar.nome;
+        document.getElementById("editCategoria").value =
+          produtoParaEditar.categoria;
+        document.getElementById("editPreco").value = produtoParaEditar.preco;
+        document.getElementById("editStatus").checked = produtoParaEditar.ativo;
+        modalEditar.style.display = "block";
+      }
+    });
+  });
+
+  document.querySelectorAll(".btn-excluir").forEach((btn) => {
+    btn.addEventListener("click", async (e) => {
+      const id = e.target.closest("button").getAttribute("data-id");
+      if (confirm("Tem certeza que deseja excluir este produto do sistema?")) {
+        await deleteDoc(doc(db, "produtos", id));
+      }
+    });
+  });
+}
